@@ -17,7 +17,7 @@ let
     "noatime"
   ];
   # Paths for RAID devices
-  r1Path = "/dev/sda3"; # needed due to unknow problems when using /dev/disk/by-uuid/ for system raid while booting process
+  r1Path = "/dev/disk/by-uuid/99ac35e7-f955-4831-9bd6-854c14f83dc9";
   r2Path = "/dev/disk/by-uuid/";
 in
 {
@@ -29,7 +29,7 @@ in
   fileSystems."/" = {
     device = r1Path;
     fsType = "btrfs";
-    options = [ "subvol=@" "compress=zstd:1" ] ++ opts;
+    options = [ "subvol=@" "nodatacow" ] ++ opts;
   };
 
   fileSystems."/nix" = {
@@ -51,6 +51,17 @@ in
   };
 
   # Raid 1 mounts
+  fileSystems."/raid/r1" = {
+    device = r1Path;
+    fsType = "btrfs";
+    options = [ "subvol=@data" "compress=zstd:1" ] ++ opts;
+  };
+
+  fileSystems."/raid/r1/db" = {
+    device = r1Path;
+    fsType = "btrfs";
+    options = [ "subvol=@db" "nodatacow" ] ++ opts;
+  };
 
   # Raid 2 mounts
 

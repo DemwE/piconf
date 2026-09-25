@@ -27,9 +27,5 @@
     };
 
     history.path = "${config.xdg.stateHome}/zsh/history";
-    initContent = ''
-      if [[ $- == *i* ]]; then
-          fastfetch
-      fi'';
   };
 }

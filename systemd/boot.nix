@@ -26,6 +26,17 @@ in
   systemd.services.sync-boot-firmware = {
     description = "Quick synchronization of /boot -> /boot2 (FAT16/FAT32)";
     path = [ pkgs.util-linux pkgs.rsync ];
+    wantedBy = [ "multi-user.target" ];
+    after = [
+      "boot2.automount"
+      "boot2-firmware.automount"
+      "boot2.mount"
+      "boot2-firmware.mount"
+    ];
+    requires = [
+      "boot2.mount"
+      "boot2-firmware.mount"
+    ];
 
     serviceConfig = {
       Type = "oneshot";
