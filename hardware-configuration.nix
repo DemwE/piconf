@@ -10,40 +10,51 @@
 }:
 
 let
+  # Options for BTRFS mounts
   opts = [
-    "degraded"
     "space_cache=v2"
+    "discard=async"
+    "noatime"
   ];
+  # Paths for RAID devices
+  r1Path = "/dev/sda3"; # needed due to unknow problems when using /dev/disk/by-uuid/ for system raid while booting process
+  r2Path = "/dev/disk/by-uuid/";
 in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  # System mounts
   fileSystems."/" = {
-    device = "/dev/disk/by-label/r1";
+    device = r1Path;
     fsType = "btrfs";
-    options = [ "subvol=@" ] ++ opts;
+    options = [ "subvol=@" "compress=zstd:1" ] ++ opts;
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-label/r1";
+    device = r1Path;
     fsType = "btrfs";
-    options = [ "subvol=@nix" ] ++ opts;
+    options = [ "subvol=@nix" "compress=zstd:1" ] ++ opts;
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-label/r1";
+    device = r1Path;
     fsType = "btrfs";
-    options = [ "subvol=@home" ] ++ opts;
+    options = [ "subvol=@home" "compress=zstd:1" ] ++ opts;
   };
 
   fileSystems."/var/log" = {
-    device = "/dev/disk/by-label/r1";
+    device = r1Path;
     fsType = "btrfs";
-    options = [ "subvol=@log" ] ++ opts;
+    options = [ "subvol=@log" "compress=zstd:1" ] ++ opts;
   };
 
+  # Raid 1 mounts
+
+  # Raid 2 mounts
+
+  # Boot and firmware partitions
   fileSystems."/boot" = {
     device = "/dev/sda2";
     fsType = "vfat";

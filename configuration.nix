@@ -13,6 +13,12 @@
   # Allow unfree packages globally
   nixpkgs.config.allowUnfree = true;
 
+  # Enable Flakes
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   # System version - inherited from flake.nix
   system.stateVersion = systemVersion;
 

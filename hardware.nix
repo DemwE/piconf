@@ -11,6 +11,8 @@
     "btrfs"
     "usbhid"
     "usb_storage"
+    "xhci_pci"
+    "uas" 
   ];
   boot.initrd.kernelModules = [
     "vc4"
@@ -25,6 +27,7 @@
   boot.kernelParams = [
     "console=tty0"
     "cma=128M"
+    "rootflags=degraded"
   ];
   hardware.raspberry-pi.firmware.uboot.enable = true;
   hardware.raspberry-pi."4".fkms-3d.enable = false;
