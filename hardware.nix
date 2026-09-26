@@ -28,6 +28,7 @@
     "console=tty0"
     "cma=128M"
     "rootflags=degraded"
+    "usb-storage.quirks=*:u"
   ];
   hardware.raspberry-pi.firmware.uboot.enable = true;
   hardware.raspberry-pi."4".fkms-3d.enable = false;

@@ -12,13 +12,13 @@
     after = [
       "network-online.target"
       "docker.service"
-      "raid-r1.mount"
-      "raid-r1-db.mount"
+      "raid-data.mount"
+      "raid-data-db.mount"
     ];
     requires = [
       "docker.service"
-      "raid-r1.mount"
-      "raid-r1-db.mount"
+      "raid-data.mount"
+      "raid-data-db.mount"
     ];
     wants = [ "network-online.target" ];
 
@@ -26,7 +26,7 @@
       Type = "oneshot";
       RemainAfterExit = true;
       User = "kali4";
-      WorkingDirectory = "/raid/r1/docker/containers/booru";
+      WorkingDirectory = "/raid/data/docker/containers/booru";
       ExecStart = "${pkgs.docker-compose}/bin/docker-compose --project-name booru up --detach --remove-orphans";
       ExecStop = "${pkgs.docker-compose}/bin/docker-compose --project-name booru stop";
       TimeoutStartSec = 300;

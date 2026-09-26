@@ -18,7 +18,6 @@ let
   ];
   # Paths for RAID devices
   r1Path = "/dev/disk/by-uuid/99ac35e7-f955-4831-9bd6-854c14f83dc9";
-  r2Path = "/dev/disk/by-uuid/b315e357-1e6f-4458-9c07-40004d572440";
 in
 {
   imports = [
@@ -50,24 +49,23 @@ in
     options = [ "subvol=@log" "compress=zstd:1" ] ++ opts;
   };
 
-  # Raid 1 mounts
-  fileSystems."/raid/r1" = {
+  # Raid mounts
+  fileSystems."/raid/data" = {
     device = r1Path;
     fsType = "btrfs";
     options = [ "subvol=@data" "compress=zstd:1" ] ++ opts;
   };
 
-  fileSystems."/raid/r1/db" = {
+  fileSystems."/raid/data/db" = {
     device = r1Path;
     fsType = "btrfs";
     options = [ "subvol=@db" "nodatacow" ] ++ opts;
   };
 
-  # Raid 2 mountsboot
-  fileSystems."/raid/r2" = {
-    device = r2Path;
+  fileSystems."/raid/nfs" = {
+    device = r1Path;
     fsType = "btrfs";
-    options = [ "subvol=@data" "compress=zstd:1" "nofail" ] ++ opts;
+    options = [ "subvol=@nfs" "compress=zstd:1" ] ++ opts;
   };
 
   # Boot and firmware partitions

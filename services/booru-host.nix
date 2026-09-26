@@ -12,15 +12,15 @@
 
     after = [
       "network-online.target"
-      "raid-r1.mount"
+      "raid-data.mount"
     ];
     wants = [ "network-online.target" ];
-    requires = [ "raid-r1.mount" ];
+    requires = [ "raid-data.mount" ];
 
     serviceConfig = {
       Type = "exec";
       User = "kali4";
-      ExecStart = "${pkgs.bash}/bin/bash /raid/r1/scripts/booru/booruHost.sh";
+      ExecStart = "${pkgs.bash}/bin/bash /raid/data/scripts/booru/booruHost.sh";
     };
   };
 

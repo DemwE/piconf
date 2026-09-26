@@ -12,9 +12,9 @@
         "server min protocol" = "SMB2_02";
       };
 
-r1 = {
-        "path" = "/raid/r1";
-        "comment" = "Raid 1";
+      data = {
+        "path" = "/raid/data";
+        "comment" = "Raid data share";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
@@ -27,9 +27,9 @@ r1 = {
         "force directory mode" = "0775";
       };
 
-      r2 = {
-        "path" = "/raid/r2";
-        "comment" = "Raid r2";
+      nfs = {
+        "path" = "/raid/nfs";
+        "comment" = "Raid nfs share";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
@@ -46,14 +46,14 @@ r1 = {
 
   systemd.services.samba-smbd = {
     after = [
-      "raid-r1.mount"
-      "raid-r1-db.mount"
-      "raid-r2.mount"
+      "raid-data.mount"
+      "raid-data-db.mount"
+      "raid-nfs.mount"
     ];
     wants = [
-      "raid-r1.mount"
-      "raid-r1-db.mount"
-      "raid-r2.mount"
+      "raid-data.mount"
+      "raid-data-db.mount"
+      "raid-nfs.mount"
     ];
   };
 }
