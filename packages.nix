@@ -21,5 +21,6 @@
     nh
     neovim
     hdparm
+    compsize
   ];
 }
