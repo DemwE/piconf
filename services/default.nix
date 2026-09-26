@@ -2,6 +2,7 @@
 {
   imports = [
     ./docker.nix
+    ./samba.nix
   ];
 
   services.openssh = {
