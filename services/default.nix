@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./booru-host.nix
     ./booru.nix
     ./docker.nix
     ./samba.nix
