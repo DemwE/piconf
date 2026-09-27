@@ -22,5 +22,6 @@
     neovim
     hdparm
     compsize
+    cloudflared
   ];
 }

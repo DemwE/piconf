@@ -3,6 +3,7 @@
   imports = [
     ./booru-host.nix
     ./booru.nix
+    ./cloudflared.nix
     ./docker.nix
     ./gambling-bot.nix
     ./samba.nix
