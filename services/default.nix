@@ -6,6 +6,7 @@
     ./docker.nix
     ./gambling-bot.nix
     ./samba.nix
+    ./plan-bot.nix
   ];
 
   services.openssh = {

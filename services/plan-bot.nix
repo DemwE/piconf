@@ -6,12 +6,12 @@ let
     ps.requests
     ps.python-dotenv
   ]);
-  scriptDir = "/raid/data/discord_bots/gambling_bot";
+  scriptDir = "/raid/data/discord_bots/plan_bot";
   script = "${scriptDir}/main.py";
 in
 {
-  systemd.services.gambling-bot = {
-    description = "Gambling bot";
+  systemd.services.plan-bot = {
+    description = "Plan updater bot";
     wantedBy = [ "multi-user.target" ];
 
     path = [
