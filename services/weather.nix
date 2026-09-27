@@ -3,7 +3,6 @@
 let
   pythonEnv = pkgs.python314.withPackages (ps: [
     ps.flask
-    ps.sqlite3
   ]);
   scriptDir = "/raid/data/python_things/weather_project/server_new_version";
   script = "${scriptDir}/server.py";
