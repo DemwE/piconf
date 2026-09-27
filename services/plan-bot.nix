@@ -7,6 +7,10 @@ let
     ps.python-dotenv
     ps.playwright
   ]);
+  playwrightBrowsers = pkgs.playwright-driver.browsers.override {
+    withFirefox = false;
+    withWebkit = false;
+  };
   scriptDir = "/raid/data/discord_bots/plan-bot";
   script = "${scriptDir}/main.py";
 in
@@ -27,14 +31,21 @@ in
     wants = [ "network-online.target" ];
     requires = [ "raid-data.mount" ];
 
-    restartTriggers = [ pythonEnv ];
+    restartTriggers = [
+      pythonEnv
+      playwrightBrowsers
+    ];
 
     serviceConfig = {
       Type = "exec";
       User = "kali4";
       WorkingDirectory = scriptDir;
       ExecStart = "${pythonEnv}/bin/python3 ${script}";
-      Environment = "PYTHONUNBUFFERED=1";
+      Environment = [
+        "PLAYWRIGHT_BROWSERS_PATH=${playwrightBrowsers}"
+        "PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true"
+        "PYTHONUNBUFFERED=1"
+      ];
       Restart = "on-failure";
       RestartSec = 30;
     };
