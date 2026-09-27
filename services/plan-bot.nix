@@ -5,8 +5,9 @@ let
     ps.discordpy
     ps.requests
     ps.python-dotenv
+    ps.playwright
   ]);
-  scriptDir = "/raid/data/discord_bots/plan_bot";
+  scriptDir = "/raid/data/discord_bots/plan-bot";
   script = "${scriptDir}/main.py";
 in
 {
