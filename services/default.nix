@@ -4,6 +4,7 @@
     ./booru-host.nix
     ./booru.nix
     ./docker.nix
+    ./gambling-bot.nix
     ./samba.nix
   ];
 
