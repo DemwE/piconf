@@ -7,6 +7,7 @@
     ./gambling-bot.nix
     ./samba.nix
     ./plan-bot.nix
+    ./weather.nix
   ];
 
   services.openssh = {
